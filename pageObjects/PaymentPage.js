@@ -17,6 +17,7 @@ class PaymentPage {
     // "Order Placed!" page
     this.orderPlacedHeading = page.locator('[data-qa="order-placed"]');
     this.orderConfirmedMessage = page.getByText('Congratulations! Your order has been confirmed!');
+    this.downloadInvoiceButton = page.locator('a[href^="/download_invoice/"]');
     this.continueButton = page.locator('[data-qa="continue-button"]');
   }
 
@@ -33,6 +34,18 @@ class PaymentPage {
   async verifyOrderPlaced() {
     await expect(this.orderPlacedHeading).toHaveText('Order Placed!');
     await expect(this.orderConfirmedMessage).toBeVisible();
+  }
+
+  /** Clicks "Download Invoice" and returns Playwright's Download object */
+  async downloadInvoice() {
+    // Start waiting for the download before clicking, so it can't be missed
+    const downloadPromise = this.page.waitForEvent('download');
+    await this.downloadInvoiceButton.click();
+    return downloadPromise;
+  }
+
+  async clickContinue() {
+    await this.continueButton.click();
   }
 }
 

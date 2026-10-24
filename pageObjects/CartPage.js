@@ -50,6 +50,12 @@ class CartPage {
     return this.getRow(productName).locator('.cart_total_price').innerText();
   }
 
+  /** Sum of every row's total, as a number ("Rs. 500" + "Rs. 400" -> 900) */
+  async getCartTotal() {
+    const totals = await this.cartRows.locator('.cart_total_price').allInnerTexts();
+    return totals.reduce((sum, text) => sum + Number(text.replace(/[^0-9]/g, '')), 0);
+  }
+
   async removeProduct(productName) {
     await this.getRow(productName).locator('.cart_quantity_delete').click();
     await expect(this.getRow(productName)).toHaveCount(0);

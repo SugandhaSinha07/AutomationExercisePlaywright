@@ -30,6 +30,8 @@ Test case numbers match the site's own [Test Cases](https://automationexercise.c
 | | TC17 – Remove Products From Cart | Row removed, "Cart is empty!" |
 | `checkout.spec.js` | TC14 – Place Order: Register while Checkout | Guest checkout popup, register, address check, payment, "Order Placed!" |
 | | TC15 – Place Order: Register before Checkout | Register, cart, address check, payment, "Order Placed!" |
+| | TC16 – Place Order: Login before Checkout | Login with an existing account, cart, address check, payment, "Order Placed!" |
+| | TC24 – Download Invoice after purchase order | `invoice.txt` is downloaded and contains the user's name and the cart total |
 
 ## Project structure
 
@@ -45,7 +47,7 @@ Test case numbers match the site's own [Test Cases](https://automationexercise.c
 │   ├── CartModal.js          # "Added!" popup (shared component)
 │   ├── CartPage.js           # cart rows, remove, proceed to checkout
 │   ├── CheckoutPage.js       # address details, review order, place order
-│   └── PaymentPage.js        # card details, order confirmation
+│   └── PaymentPage.js        # card details, order confirmation, invoice download
 ├── tests/                    # One spec file per feature
 ├── utils/
 │   └── testData.js           # unique user generator, login account, payment card
